@@ -93,11 +93,11 @@ controlpage.onAlert=function(msg){
 			respond([id,cmdId,'pageRendered']);
 			break;
 		case 'pageSet':
-			page[request[3]]=request[4];
+			page.settings[request[3]]=request[4];
 			respond([id,cmdId,'pageSetDone']);
 			break;
 		case 'pageGet':
-			var result=page[request[3]];
+			var result=page.settings[request[3]];
 			respond([id,cmdId,'pageGetDone',JSON.stringify(result)]);
 			break;
 		case 'pageSetFn':
