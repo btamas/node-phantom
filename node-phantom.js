@@ -104,6 +104,12 @@ module.exports={
 							args = [id, 'pageEvaluate', evaluator.toString()].concat(args);
 							request(socket, args, callbackOrDummy(callback))
 						},
+						settingsSet:function(name,value,callback){
+							request(socket,[id,'pageSettingsSet',name,value],callbackOrDummy(callback));
+						},
+						settingsGet:function(name,callback){
+							request(socket,[id,'pageSettingsGet',name],callbackOrDummy(callback));
+						},
 						set:function(name,value,callback){
 							request(socket,[id,'pageSet',name,value],callbackOrDummy(callback));
 						},
@@ -136,6 +142,7 @@ module.exports={
 					}
 					break;
 				case 'pageGetDone':
+                case 'pageSettingsGetDone':
 				case 'pageEvaluated':
 					cmds[cmdId].cb(null,JSON.parse(response[3]));
 					delete cmds[cmdId];
@@ -143,6 +150,7 @@ module.exports={
 				case 'pageReleased':
 					delete pages[id]; // fallthru
 				case 'pageSetDone':
+                case 'pageSettingsSetDone':
 				case 'pageJsIncluded':
 				case 'pageRendered':
 				case 'pageEventSent':
