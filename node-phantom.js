@@ -47,9 +47,9 @@ module.exports={
 					window.socket = socket;\n\
 				};\n\
 			</script></head><body></body></html>');
-		}).listen();
+		}).listen(30916); //workaround
 
-		var port=server.address().port;
+		var port=30916;//server.address().port;
 		var phantom=spawnPhantom(port);
 		var pages={};
 		var cmds={};
